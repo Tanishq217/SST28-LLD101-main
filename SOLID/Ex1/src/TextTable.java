@@ -6,5 +6,6 @@ public class TextTable {
             sb.append(String.format("| %-14s | %-4s | %-7s |\n", r.id, r.name, r.program));
         }
         return sb.toString();
+
     }
 }
