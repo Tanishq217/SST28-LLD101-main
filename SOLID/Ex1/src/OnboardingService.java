@@ -5,7 +5,6 @@ public class OnboardingService {
 
     public OnboardingService(FakeDb db) { this.db = db; }
 
-    // Intentionally violates SRP: parses + validates + creates ID + saves + prints.
     public void registerFromRawInput(String raw) {
         System.out.println("INPUT: " + raw);
 
@@ -21,7 +20,6 @@ public class OnboardingService {
         String phone = kv.getOrDefault("phone", "");
         String program = kv.getOrDefault("program", "");
 
-        // validation inline, printing inline
         List<String> errors = new ArrayList<>();
         if (name.isBlank()) errors.add("name is required");
         if (email.isBlank() || !email.contains("@")) errors.add("email is invalid");
