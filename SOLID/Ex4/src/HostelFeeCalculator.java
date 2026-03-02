@@ -1,9 +1,28 @@
 import java.util.*;
 
 public class HostelFeeCalculator {
+
+
     private final FakeBookingRepo repo;
 
-    public HostelFeeCalculator(FakeBookingRepo repo) { this.repo = repo; }
+    private static final Map<Integer , Double> ROOM_PRICE = new HashMap<>();
+    private static final Map<Integer , Double> ADDON_PRICE = new HashMap<>() ;
+
+    static {
+        ROOM_PRICE.put(LegacyRoomTypes.SINGLE, 14000.0) ;
+        ROOM_PRICE.put(LegacyRoomTypes.DOUBLE, 15000.0) ;
+        ROOM_PRICE.put(LegacyRoomTypes.TRIPLE, 12000.0) ;
+
+
+        ADDON_PRICE.put(AddOn.MESS.ordinal(),1000.0) ;
+        ADDON_PRICE.put(AddOn.GYM.ordinal(), 500.0) ;
+        ADDON_PRICE.put(AddOn.LAUNDRY.ordinal(), 300.0) ;
+    }
+
+
+    public HostelFeeCalculator(FakeBookingRepo repo) {
+        this.repo = repo;
+    }
 
     // OCP violation: switch + add-on branching + printing + persistence.
     public void process(BookingRequest req) {
@@ -17,21 +36,12 @@ public class HostelFeeCalculator {
     }
 
     private Money calculateMonthly(BookingRequest req) {
-        double base;
-        switch (req.roomType) {
-            case LegacyRoomTypes.SINGLE -> base = 14000.0;
-            case LegacyRoomTypes.DOUBLE -> base = 15000.0;
-            case LegacyRoomTypes.TRIPLE -> base = 12000.0;
-            default -> base = 16000.0;
-        }
-
-        double add = 0.0;
+       double base = ROOM_PRICE.getOrDefault(req.roomType, 16000.0) ;
+        double extra = 0.0;
         for (AddOn a : req.addOns) {
-            if (a == AddOn.MESS) add += 1000.0;
-            else if (a == AddOn.LAUNDRY) add += 500.0;
-            else if (a == AddOn.GYM) add += 300.0;
+            extra += ADDON_PRICE.getOrDefault(a, 0.0);
         }
 
-        return new Money(base + add);
+        return new Money(base + extra);
     }
 }
