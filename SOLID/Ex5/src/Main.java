@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println("PDF: " + safe(pdf, req));
         System.out.println("CSV: " + safe(csv, req));
-        System.out.println("JSON: " + safe(json, req));
+        System.out.println("JSON: " + safe(json, req)) ;
     }
 
     private static String safe(Exporter e, ExportRequest r) {
