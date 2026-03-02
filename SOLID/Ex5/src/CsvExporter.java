@@ -4,8 +4,8 @@ public class CsvExporter extends Exporter {
     @Override
     public ExportResult export(ExportRequest req) {
         // LSP issue: changes meaning by lossy conversion
-        String body = req.body == null ? "" : req.body.replace("\n", " ").replace(",", " ");
-        String csv = "title,body\n" + req.title + "," + body + "\n";
+        String escapedBody = "\"" + req.body.replace("\"", "\"\"") + "\"";
+        String csv = "title,body\n" + req.title + "," + escapedBody + "\n";
         return new ExportResult("text/csv", csv.getBytes(StandardCharsets.UTF_8));
     }
 }
