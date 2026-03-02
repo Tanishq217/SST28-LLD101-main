@@ -14,6 +14,18 @@ public final class Validation {
 
     private Validation() {}
 
+    public static void check(boolean condition, String msg) {
+        if (!condition) throw new IllegalArgumentException(msg);
+    }
+
+    public static boolean isValidId(String s) {
+        return s != null && s.matches("^[A-Z0-9-]{1,20}$");
+    }
+
+    public static boolean isEmail(String s) {
+        return s != null && s.contains("@");
+    }
+
     public static void requireNonBlank(String value, String fieldName) {
         if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException(fieldName + " must not be blank");
