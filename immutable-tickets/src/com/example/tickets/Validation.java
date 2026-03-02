@@ -54,7 +54,7 @@ public final class Validation {
     }
 
     public static void requireOneOf(String value, String fieldName, String... allowed) {
-        if (value == null) return; // optional
+        if (value == null) return;
         for (String a : allowed) {
             if (a.equals(value)) return;
         }
@@ -62,7 +62,7 @@ public final class Validation {
     }
 
     public static void requireRange(Integer value, int min, int max, String fieldName) {
-        if (value == null) return; // optional
+        if (value == null) return;
         if (value < min || value > max) {
             throw new IllegalArgumentException(fieldName + " must be between " + min + " and " + max);
         }
