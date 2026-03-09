@@ -67,13 +67,17 @@ public final class IncidentTicket {
         public Builder tags(List<String> t) { this.tags = t; return this; }
 
         public IncidentTicket build() {
+
             // Centralized Validation
+
             Validation.check(Validation.isValidId(id), "Invalid ID format");
+
             Validation.check(Validation.isEmail(reporterEmail), "Invalid reporter email");
             Validation.check(title != null && !title.isEmpty() && title.length() <= 80, "Invalid title");
 
             List<String> validPriorities = Arrays.asList("LOW", "MEDIUM", "HIGH", "CRITICAL");
             Validation.check(validPriorities.contains(priority), "Invalid priority");
+
 
             if (slaMinutes != 0) {
                 Validation.check(slaMinutes >= 5 && slaMinutes <= 7200, "SLA must be 5-7200");
