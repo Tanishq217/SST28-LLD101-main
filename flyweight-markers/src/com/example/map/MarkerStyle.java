@@ -10,10 +10,10 @@ package com.example.map;
  */
 public class MarkerStyle {
 
-    private final String shape;   // e.g., PIN, CIRCLE, SQUARE
-    private final String color;   // e.g., RED, BLUE, GREEN
-    private final int size;       // e.g., 10..20
-    private final boolean filled; // filled vs outline
+    private final  String shape;   // e.g., PIN, CIRCLE, SQUARE
+    private final  String color;   // e.g., RED, BLUE, GREEN
+    private final  int size;       // e.g., 10..20
+    private final  boolean filled; // filled vs outline
 
     public MarkerStyle(String shape, String color, int size, boolean filled) {
         this.shape = shape;
@@ -27,11 +27,11 @@ public class MarkerStyle {
     public int getSize() { return size; }
     public boolean isFilled() { return filled; }
 
-//    // BROKEN: setters should go away after immutability refactor
-//    public void setShape(String shape) { this.shape = shape; }
-//    public void setColor(String color) { this.color = color; }
-//    public void setSize(int size) { this.size = size; }
-//    public void setFilled(boolean filled) { this.filled = filled; }
+//     // BROKEN: setters should go away after immutability refactor
+//     public void setShape(String shape) { this.shape = shape; }
+//     public void setColor(String color) { this.color = color; }
+//     public void setSize(int size) { this.size = size; }
+//     public void setFilled(boolean filled) { this.filled = filled; }
 
     @Override
     public String toString() {
