@@ -22,6 +22,7 @@ public class MapDataSource {
     private static final String[] COLORS = {"RED", "BLUE", "GREEN", "ORANGE"};
     private static final int[] SIZES = {10, 12, 14, 16};
 
+
     public List<MapMarker> loadMarkers(int count) {
         Random rnd = new Random(7);
         List<MapMarker> out = new ArrayList<>(count);
